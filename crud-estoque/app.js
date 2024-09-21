@@ -8,7 +8,7 @@ const swaggerJsdoc = require('swagger-jsdoc')
 
 require('./infrastructure/banco_dados')
 var router_user = require('./controllers/UserController');
-var router_produto = require('./controllers/ProdutoController');
+var router_produto = require('./controllers/ProdutoContoller');
 
 /**
  * @swagger

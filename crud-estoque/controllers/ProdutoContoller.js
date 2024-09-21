@@ -146,5 +146,70 @@ router.post('/', async (req, res) => {
     return res.json(await ProdutoService.create(produto));
 });
 
+/**
+ * @swagger
+ * /items/{id}:
+ *   delete:
+ *     summary: Deleta um item
+ *     tags: [Item]
+ *     responses:
+ *       200:
+ *         description: Item removido                 
+ *       404:
+ *         description: Item não encontrado
+*/
+router.delete('/:id', async(req, res)=>{
+    let id = req.params.id
+    res.json(await ProdutoService.delete(id))
+})
 
+/**
+ * @swagger
+ * /item/{id}:
+ *   post:
+ *     summary: Retorna um usuário criado
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID do Item
+ *     requestBody:
+ *      required: true
+ *      content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nome:
+ *                  type:String
+ *                  require:true
+ *               valor:
+ *                  type:Number
+ *                  min:0
+ *               categoria:
+ *                  type:String
+ *               quantidade:
+ *                  type:Number
+ *               data:
+ *                  type:Date
+ *                  default:Date.now
+ *     responses:
+ *       200:
+ *         description: Item modificiado
+ *                 
+ *       404:
+ *         description: Usuario não encontrador
+*/
+router.put('/:id', async(req, res)=>{
+    let produto = req.body
+    let id = req.params.id
+    res.json(await ProdutoService.atualizar(id, produto))
+})
+
+
+// routes para /items-report 
+// routes para /monthly-expenses
 module.exports = router;

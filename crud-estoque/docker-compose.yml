@@ -1,19 +1,6 @@
 version: '3.8'
 
 services:
-  app:
-    build: .
-    container_name: express_app
-    depends_on:
-      - mongodb
-    ports:
-      - "3002:3002" # Mapeie a porta 3000 do host para a porta 3000 do container
-    volumes:
-      - .:/app # Mapeie o diretório atual para o diretório de trabalho do container
-    environment:
-      - NODE_ENV=development
-    networks:
-      - app_network
 
   mongodb:
     image: mongo:latest
@@ -28,6 +15,20 @@ services:
     networks:
       - app_network
     
+  app:
+    build: .
+    container_name: express_app
+    depends_on:
+      - mongodb
+    ports:
+      - "3002:3002"
+    volumes:
+      - .:/app
+      - /app/node_modules # Adiciona um volume anônimo para manter as dependências instaladas no container
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app_network
 volumes:
   mongodb_data:
 
