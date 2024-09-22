@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const ProdutoService = require('../domain/services/ProdutoService')
+const ItemService = require('../domain/services/ItemService')
 
 
 /**
@@ -25,7 +25,7 @@ const ProdutoService = require('../domain/services/ProdutoService')
  *                     example: 66ecafd0be031f5ab155b2d0
  *                   nome:
  *                     type: string
- *                     example: "Produto A"
+ *                     example: "Item A"
  *                   valor:
  *                     type: number
  *                     example: 49.99
@@ -41,7 +41,7 @@ const ProdutoService = require('../domain/services/ProdutoService')
  *                     example: "2024-09-18T12:34:56Z"
  */
 router.get('/', async (req, res) => {
-    return res.json(await ProdutoService.findAll());
+    return res.json(await ItemService.findAll());
 });
 
 /**
@@ -87,7 +87,7 @@ router.get('/', async (req, res) => {
  */
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
-    res.json(await ProdutoService.findById(id));
+    res.json(await ItemService.findById(id));
 });
 
 /**
@@ -142,8 +142,8 @@ router.get('/:id', async (req, res) => {
  *         description: item não criado
  */
 router.post('/', async (req, res) => {
-    let produto = req.body;
-    return res.json(await ProdutoService.create(produto));
+    let item = req.body;
+    return res.json(await ItemService.create(item));
 });
 
 /**
@@ -160,7 +160,7 @@ router.post('/', async (req, res) => {
 */
 router.delete('/:id', async(req, res)=>{
     let id = req.params.id
-    res.json(await ProdutoService.delete(id))
+    res.json(await ItemService.delete(id))
 })
 
 /**
@@ -204,9 +204,9 @@ router.delete('/:id', async(req, res)=>{
  *         description: Usuario não encontrador
 */
 router.put('/:id', async(req, res)=>{
-    let produto = req.body
+    let item = req.body
     let id = req.params.id
-    res.json(await ProdutoService.atualizar(id, produto))
+    res.json(await ItemService.atualizar(id, item))
 })
 
 
