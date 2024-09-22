@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import ItemService from '../services/ItemService'; // Importa o serviço de item
+import ItemService from '../services/ItemService';
+import '../assets/css/CadastroItem.css';
 
 function CadastroItem() {
   const [itemName, setItemName] = useState('');
@@ -15,9 +16,9 @@ function CadastroItem() {
     try {
       const result = await ItemService.createItem({
         name: itemName,
-        quantity: itemQuantity,
-        value: itemValue,
-        purchasePrice: itemPurchasePrice,
+        quantity: Number(itemQuantity),
+        value: Number(itemValue),
+        purchasePrice: Number(itemPurchasePrice),
         date: itemDate,
       });
       if (result && result.success) {
@@ -28,10 +29,10 @@ function CadastroItem() {
         setItemPurchasePrice('');
         setItemDate('');
       } else {
-        setMessage('Erro ao cadastrar item');
+        setMessage(result.message);
       }
     } catch (error) {
-      setMessage('Erro ao cadastrar item');
+      setMessage('Erro ao cadastrar item: ' + error.message);
     }
   };
 

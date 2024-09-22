@@ -8,7 +8,7 @@ const swaggerJsdoc = require('swagger-jsdoc')
 
 require('./infrastructure/banco_dados')
 var router_user = require('./controllers/UserController');
-var router_item = require('./controllers/ItemContoller');
+var router_produto = require('./controllers/ProdutoContoller');
 
 /**
  * @swagger
@@ -41,7 +41,7 @@ app.use(function (req, res, next) {
 
 // criando os endpoints
 app.use('/usuario',router_user);
-app.use('/items', router_item);
+app.use('/items', router_produto);
 
 
 

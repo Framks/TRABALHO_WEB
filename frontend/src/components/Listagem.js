@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ItemService from '../services/ItemService'; // Importa o serviço de item
 import { Link } from 'react-router-dom';
+import '../assets/css/Listagem.css';
+
 
 function Listagem() {
   const [items, setItems] = useState([]);

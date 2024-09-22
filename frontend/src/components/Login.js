@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
-import UserService from '../services/UserService'; // Importa o serviço de usuário
+import { useNavigate } from 'react-router-dom';  // Importa o useNavigate
+import UserService from '../services/UserService';
+import '../assets/css/Login.css';
 
-function Login({ onLoginSuccess }) {
+function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginMessage, setLoginMessage] = useState('');
+  const navigate = useNavigate();  // Hook para navegar para outra página
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-      // Chama o serviço de login passando o username e password
-      const result = await UserService.login(username, password);
-      console.log('Login result:', result); // Debugging
-
+      const result = await UserService.login(username, password); // Use 'email' e 'password'
       if (result && result.success) {
-        onLoginSuccess(); // Chama a função de sucesso do login
+        navigate('/'); // Redireciona para a página "home"
       } else {
-        // setLoginMessage('Invalid credentials');
-        onLoginSuccess();
+        setLoginMessage('Credenciais inválidas. Tente novamente.');
       }
     } catch (error) {
-      setLoginMessage('Error during login');
+      setLoginMessage('Erro durante o login. Tente mais tarde.');
     }
   };
+  
 
   return (
     <div className="login-container">

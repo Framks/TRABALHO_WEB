@@ -2,8 +2,7 @@ var mongoose = require('mongoose')
 
 var userSchema = mongoose.Schema(
     {
-        nome:{type:String,required:true},
-        email:{type:String,required:true},
+        username:{type:String,required:true},
         senha:{type:String,required:true}
     }
 )
