@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const User = require('../models/User');
 
 async function createUser() {
-  await mongoose.connect('mongodb://admin:password@localhost:27017/seu_banco_de_dados', {
+  await mongoose.connect('mongodb://admin:password@localhost:27017/estoque?authSource=admin', {
+  // await mongoose.connect('mongodb://admin:password@mongodb:27017/estoque?authSource=admin', {   // para conexões com docker 
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });

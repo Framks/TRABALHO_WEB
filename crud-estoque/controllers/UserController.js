@@ -125,4 +125,9 @@ router.post('/', async (req, res) =>{
     return res.json(await UserService.create(user))
 })
 
+router.post('/login', async (req, res) =>{
+    let credenciais = req.body
+    return res.json(await UserService.login(credenciais))
+})
+
 module.exports = router;

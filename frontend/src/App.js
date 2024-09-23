@@ -8,6 +8,9 @@ import CadastroItem from '../src/components/CadastroItem';
 import RelatorioMensal from '../src/components/RelatorioMensal';
 import RelatorioGeral from '../src/components/RelatorioGeral';
 
+
+//   <Route path='editar/:id' element={<Editar/>}/>
+
 function App() {
   return (
     <Router>

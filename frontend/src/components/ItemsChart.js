@@ -7,11 +7,11 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 const ItemsChart = ({ data }) => {
   const chartData = {
-    labels: data.map(item => item.name),
+    labels: data.map(item => item.nome),
     datasets: [
       {
         label: 'Valor Total',
-        data: data.map(item => item.price),
+        data: data.map(item => item.valor_venda),
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,

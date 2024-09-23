@@ -35,7 +35,7 @@ function RelatorioMensal() {
   const totalItems = reportData?.totalItems || 0;
 
   const totalSpent = items.reduce((total, item) => {
-    const price = parseFloat(item.price) || 0;
+    const price = parseFloat(item.valor_venda) || 0;
     return total + price;
   }, 0);
 
@@ -50,8 +50,8 @@ function RelatorioMensal() {
       <ItemsChart data={items} />
       <ul>
         {items.map((item) => (
-          <li key={item.id}>
-            {item.name} - Cadastrado em: {new Date(item.createdAt).toLocaleDateString()} - Preço: R${(item.price ? parseFloat(item.price).toFixed(2) : '0.00')}
+          <li key={item._id}>
+            {item.nome} - Cadastrado em: {new Date(item.data).toLocaleDateString()} - Preço: R${(item.valor_venda ? parseFloat(item.valor_venda).toFixed(2) : '0.00')}
           </li>
         ))}
       </ul>

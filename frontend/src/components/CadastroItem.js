@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ItemService from '../services/ItemService';
-import '../assets/css/CadastroItem.css';
+import '../assets/css/cadastroItem.css';
 
 function CadastroItem() {
   const [itemName, setItemName] = useState('');
@@ -15,11 +15,11 @@ function CadastroItem() {
 
     try {
       const result = await ItemService.createItem({
-        name: itemName,
-        quantity: Number(itemQuantity),
-        value: Number(itemValue),
-        purchasePrice: Number(itemPurchasePrice),
-        date: itemDate,
+        nome: itemName,
+        quantidade: Number(itemQuantity),
+        valor_venda: Number(itemValue),
+        valor_compra: Number(itemPurchasePrice),
+        data: itemDate,
       });
       if (result && result.success) {
         setMessage('Item cadastrado com sucesso');

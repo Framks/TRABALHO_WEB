@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ItemService from '../services/ItemService'; // Importa o serviço de item
 import { Link } from 'react-router-dom';
-import '../assets/css/Listagem.css';
+import '../assets/css/listagem.css';
 
 
 function Listagem() {
@@ -11,8 +11,8 @@ function Listagem() {
     const fetchItems = async () => {
       try {
         const result = await ItemService.getItems();
-        if (result && result.success) {
-          setItems(result.items);
+        if (result) {
+          setItems(result);
         }
       } catch (error) {
         console.error('Erro ao buscar itens', error);
@@ -26,7 +26,7 @@ function Listagem() {
     try {
       const result = await ItemService.deleteItem(id);
       if (result && result.success) {
-        setItems(items.filter(item => item.id !== id));
+        setItems(items.filter(item => item._id !== id));
       }
     } catch (error) {
       console.error('Erro ao deletar item', error);
@@ -49,15 +49,15 @@ function Listagem() {
         </thead>
         <tbody>
           {items.map(item => (
-            <tr key={item.id}>
-              <td>{item.name}</td>
-              <td>{item.quantity}</td>
-              <td>{item.value}</td>
-              <td>{item.purchasePrice}</td>
-              <td>{new Date(item.date).toLocaleDateString()}</td>
+            <tr key={item._id}>
+              <td>{item.nome}</td>
+              <td>{item.quantidade}</td>
+              <td>{item.valor_venda}</td>
+              <td>{item.valor_compra}</td>
+              <td>{new Date(item.data).toLocaleDateString()}</td>
               <td>
-                <Link to={`/editar/${item.id}`}>Editar</Link>
-                <button onClick={() => handleDelete(item.id)}>Remover</button>
+                <Link to={`/editar/${item._id}`}>Editar</Link>
+                <button onClick={() => handleDelete(item._id)}>Remover</button>
               </td>
             </tr>
           ))}

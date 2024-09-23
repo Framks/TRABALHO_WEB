@@ -11,5 +11,19 @@ class UserService{
             return null;
         }
     }
+
+    async login({password, username}){
+        try{
+            const user = await User.find({email:username, senha:password})
+            if(user){
+                return {sucess: "login sucess"}
+            }else{
+                return {regect: "login regect"}
+            }
+        }catch(exception){
+            let error =  "error " + exception
+            return error
+        }
+    }
 }
 module.exports = UserService

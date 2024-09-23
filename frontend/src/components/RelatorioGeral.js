@@ -13,7 +13,7 @@ function RelatorioGeral() {
     const fetchData = async () => {
       try {
         const data = await ItemService.getItems();
-        setItems(data || []);
+        setItems(data);
       } catch (error) {
         setError('Erro ao carregar os itens');
       } finally {
@@ -34,7 +34,7 @@ function RelatorioGeral() {
 
   const totalItems = items.length;
   const totalValue = items.reduce((total, item) => {
-    const price = parseFloat(item.price) || 0;
+    const price = parseFloat(item.valor_venda) || 0;
     return total + price;
   }, 0);
 

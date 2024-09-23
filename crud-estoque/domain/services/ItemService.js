@@ -1,4 +1,5 @@
 const Item = require('../entities/Item')
+const mongoose = require('mongoose')
 
 class ItemService{
 
@@ -55,7 +56,7 @@ class ItemService{
 
     static async delete(id) {
         try {
-            const item = await Item.findByIdAndDelete(id);
+            const item = await Item.findByIdAndDelete(new mongoose.Types.ObjectId(id));
             if (!item) {
                 throw new Error('Item não encontrado');
             }
@@ -65,6 +66,27 @@ class ItemService{
             throw error;
         }
     }
+
+    static async report(dias) {
+        let itens = [];
+        
+        if (dias && dias !== 0) {
+            let data = new Date();  
+            let datafim = new Date();  
+
+            datafim.setDate(data.getDate() - dias);
+    
+            
+            itens = await Item.find({
+                data: { $gte: datafim, $lte: data }
+            });
+        } else {
+            itens = await Item.find();
+        }
+    
+        return { items: itens, totalItems: itens.length };
+    }
+    
 }
 
 module.exports = ItemService

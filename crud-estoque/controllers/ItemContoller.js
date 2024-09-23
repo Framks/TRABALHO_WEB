@@ -44,51 +44,7 @@ router.get('/', async (req, res) => {
     return res.json(await ItemService.findAll());
 });
 
-/**
- * @swagger
- * /items/{id}:
- *   get:
- *     summary: Retorna um items específico
- *     tags: [items]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: ID do Item
- *     responses:
- *       200:
- *         description: Item encontrado
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 __id:
- *                   type: string
- *                   example: 66ecafd0be031f5ab155b2d0
- *                 nome:
- *                   type: string
- *                   example: "Item A"
- *                 valor:
- *                   type: number
- *                   example: 49.99
- *                 categoria:
- *                   type: string
- *                   example: "Eletrônicos"
- *                 quantidade:
- *                   type: number
- *                   example: 20
- *                 data:
- *                   type: string
- *                   format: date
- *                   example: "2024-09-18T12:34:56Z"
- */
-router.get('/:id', async (req, res) => {
-    const id = req.params.id;
-    res.json(await ItemService.findById(id));
-});
+
 
 /**
  * @swagger
@@ -210,6 +166,63 @@ router.put('/:id', async(req, res)=>{
 })
 
 
-// routes para /items-report 
+router.get('/items-report', async(req, res) => {
+    try {
+        let dias = parseInt(req.query.days) || 30; // Define um padrão de 30 dias
+        const report = await ItemService.report(dias); // Aguarde o resultado da função
+        return res.json(report);
+    } catch (error) {
+        console.error(error); // Log do erro no console
+        return res.status(500).json({ message: 'Erro ao gerar o relatório.' });
+    }
+})
+
+/**
+ * @swagger
+ * /items/{id}:
+ *   get:
+ *     summary: Retorna um items específico
+ *     tags: [items]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID do Item
+ *     responses:
+ *       200:
+ *         description: Item encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 __id:
+ *                   type: string
+ *                   example: 66ecafd0be031f5ab155b2d0
+ *                 nome:
+ *                   type: string
+ *                   example: "Item A"
+ *                 valor:
+ *                   type: number
+ *                   example: 49.99
+ *                 categoria:
+ *                   type: string
+ *                   example: "Eletrônicos"
+ *                 quantidade:
+ *                   type: number
+ *                   example: 20
+ *                 data:
+ *                   type: string
+ *                   format: date
+ *                   example: "2024-09-18T12:34:56Z"
+ */
+router.get('/:id', async (req, res) => {
+    const id = req.params.id;
+    res.json(await ItemService.findById(id));
+}); 
+
+
 // routes para /monthly-expenses
 module.exports = router;
