@@ -2,7 +2,7 @@ const User = require('../entities/User')
 
 class UserService{
 
-    async create(user) {
+    static async create(user) {
         try {
             const newUser = await User.create(user); // Esperar o MongoDB criar o usuário
             return newUser;
@@ -12,13 +12,16 @@ class UserService{
         }
     }
 
-    async login({password, username}){
+    static async login({nome, senha}){
         try{
-            const user = await User.find({email:username, senha:password})
+            // encontre apenas o primeiro registro
+            const user = await User.findOne({nome, senha})
+            console.log(user)
             if(user){
-                return {sucess: "login sucess"}
+                user.senha = "********"
+                return {success: "login success", user: user}
             }else{
-                return {regect: "login regect"}
+                return {reject: "login reject"}
             }
         }catch(exception){
             let error =  "error " + exception

@@ -1,9 +1,9 @@
 import axios from 'axios';
-const apiUrl = 'http://localhost:3002/login'; // Altere para sua URL de API
+const apiUrl = 'http://localhost:3002/usuario'; // Altere para sua URL de API
 const UserService = {
   async login(username, password) {
     try {
-      const response = await axios.post(`${apiUrl}/login`, { username, password }, {
+      const response = await axios.post(`${apiUrl}/login`, { nome:username, senha:password }, {
         headers: {
           'Content-Type': 'application/json',
         },

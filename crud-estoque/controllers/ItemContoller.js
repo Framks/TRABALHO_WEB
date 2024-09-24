@@ -44,8 +44,6 @@ router.get('/', async (req, res) => {
     return res.json(await ItemService.findAll());
 });
 
-
-
 /**
  * @swagger
  * /items/:
@@ -164,7 +162,6 @@ router.put('/:id', async(req, res)=>{
     let id = req.params.id
     res.json(await ItemService.atualizar(id, item))
 })
-
 
 router.get('/items-report', async(req, res) => {
     try {

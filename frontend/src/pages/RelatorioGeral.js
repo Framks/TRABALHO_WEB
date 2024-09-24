@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ItemService from '../services/ItemService';
-import MonthlyExpensesChart from './MonthlyExpensesChart';
+import MonthlyExpensesChart from '../components/MonthlyExpensesChart';
 import '../assets/css/RelatorioGeral.css';
 
 function RelatorioGeral() {

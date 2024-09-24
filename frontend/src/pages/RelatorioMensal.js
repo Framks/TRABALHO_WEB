@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ItemService from '../services/ItemService';
-import ItemsChart from './ItemsChart'; // Gráfico de itens x valor
+import ItemsChart from '../components/ItemsChart'; // Gráfico de itens x valor
 import '../assets/css/RelatorioMensal.css';
 
 function RelatorioMensal() {

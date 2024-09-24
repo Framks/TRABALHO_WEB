@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ItemService from '../services/ItemService';
-import UpdateItem from './UpdateItem'; // Componente de edição
+import UpdateItem from '../components/UpdateItem'; // Componente de edição
 import '../assets/css/listagem.css';
 
 function Listagem() {
@@ -26,9 +26,10 @@ function Listagem() {
   const handleDelete = async (id) => {
     try {
       const result = await ItemService.deleteItem(id);
-      if (result && result.success) {
+      if (result) {
         setItems(items.filter(item => item._id !== id));
       }
+      
     } catch (error) {
       console.error('Erro ao deletar item', error);
     }

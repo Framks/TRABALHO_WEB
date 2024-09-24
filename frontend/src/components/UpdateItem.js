@@ -14,6 +14,7 @@ function UpdateItem({ id, closeModal }) {
     const fetchItem = async () => {
       try {
         const result = await ItemService.getItemById(id);
+        console.log(result);
         if (result) {
           setItemName(result.nome);
           setItemQuantity(result.quantidade);
