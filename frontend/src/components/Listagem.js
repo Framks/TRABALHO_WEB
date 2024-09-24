@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import ItemService from '../services/ItemService'; // Importa o serviço de item
-import { Link } from 'react-router-dom';
+import ItemService from '../services/ItemService';
+import UpdateItem from './UpdateItem'; // Componente de edição
 import '../assets/css/listagem.css';
-
 
 function Listagem() {
   const [items, setItems] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingItemId, setEditingItemId] = useState(null);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -33,8 +34,22 @@ function Listagem() {
     }
   };
 
+  const handleEdit = (id) => {
+    setIsEditing(true);  // Abre o modal
+    setEditingItemId(id); // Define qual item está sendo editado
+  };
+
+  const closeModal = () => {
+    setIsEditing(false);
+    setEditingItemId(null);
+  };
+
+  const updateItemInList = (updatedItem) => {
+    setItems(items.map(item => item._id === updatedItem._id ? updatedItem : item));
+  };
+
   return (
-    <div className="listagem-container">
+    <div className={`listagem-container ${isEditing ? 'modal-open' : ''}`}>
       <h2>Listagem de Itens</h2>
       <table>
         <thead>
@@ -56,13 +71,22 @@ function Listagem() {
               <td>{item.valor_compra}</td>
               <td>{new Date(item.data).toLocaleDateString()}</td>
               <td>
-                <Link to={`/editar/${item._id}`}>Editar</Link>
+                <button onClick={() => handleEdit(item._id)}>Editar</button>
                 <button onClick={() => handleDelete(item._id)}>Remover</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      {isEditing && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={closeModal}>&times;</span>
+            <UpdateItem id={editingItemId} closeModal={closeModal} updateItemInList={updateItemInList} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
