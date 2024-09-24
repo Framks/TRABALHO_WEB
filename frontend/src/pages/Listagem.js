@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ItemService from '../services/ItemService';
-import UpdateItem from '../components/UpdateItem'; // Componente de edição
+import UpdateItem from '../components/UpdateItem';
 import '../assets/css/listagem.css';
 
 function Listagem() {

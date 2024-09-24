@@ -1,7 +1,6 @@
-// src/components/Layout.js
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
-import '../assets/css/Home.css'; // Importar seu CSS aqui
+import '../assets/css/home.css'; // Importar seu CSS aqui
 import { useNavigate } from 'react-router-dom';
 
 const Layout = () => {

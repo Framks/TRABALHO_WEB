@@ -5,7 +5,6 @@ import Layout from './pages/Layout'; // Ajuste o caminho conforme necessário
 import Login from './pages/Login';
 import Listagem from './pages/Listagem';
 import CadastroItem from './pages/CadastroItem';
-import RelatorioMensal from '../src/pages/RelatorioMensal';
 import RelatorioGeral from '../src/pages/RelatorioGeral';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -19,7 +18,6 @@ function App() {
         <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
           <Route path="cadastro" element={<CadastroItem />} />
           <Route path="listagem" element={<Listagem />} />
-          <Route path='relatorio-mensal' element={<RelatorioMensal />} />
           <Route path='relatorio-geral' element={<RelatorioGeral />} />
         </Route>
       </Routes>
