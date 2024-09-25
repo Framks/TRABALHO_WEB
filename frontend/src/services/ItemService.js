@@ -11,11 +11,31 @@ const ItemService = {
           'Content-Type': 'application/json',
         },
       });
-      console.log(response.data)
-      return response.data;
+      
+      return {
+        success: true,
+        item: response.data, // Supondo que a resposta contenha o item criado
+      };
     } catch (error) {
       console.error('Erro ao cadastrar item:', error);
-      return null;
+      
+      // Verificando se o erro tem uma resposta
+      if (error.response) {
+        return {
+          success: false,
+          message: error.response.data.message || 'Erro desconhecido no servidor.',
+        };
+      } else if (error.request) {
+        return {
+          success: false,
+          message: 'Erro ao conectar ao servidor. Tente novamente mais tarde.',
+        };
+      } else {
+        return {
+          success: false,
+          message: 'Erro ao cadastrar item: ' + error.message,
+        };
+      }
     }
   },
 
@@ -30,6 +50,20 @@ const ItemService = {
     } catch (error) {
       console.error('Erro ao buscar itens:', error);
       return null;
+    }
+  },
+
+  async getItemById(id) {
+    try {
+      const response = await axios.get(`${apiUrl}/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Erro ao buscar item:', error);
+      throw error; // Lança o erro para que possa ser tratado no componente
     }
   },
 
@@ -54,56 +88,34 @@ const ItemService = {
           'Content-Type': 'application/json',
         },
       });
-      return response.data;
+      
+      return {
+        success: true,
+        updatedItem: response.data,
+      };
     } catch (error) {
       console.error('Erro ao atualizar item:', error);
-      return null;
+  
+      // Verificando se o erro tem uma resposta
+      if (error.response) {
+        return {
+          success: false,
+          message: error.response.data.message || 'Erro desconhecido no servidor.',
+        };
+      } else if (error.request) {
+        return {
+          success: false,
+          message: 'Erro ao conectar ao servidor. Tente novamente mais tarde.',
+        };
+      } else {
+        return {
+          success: false,
+          message: 'Erro ao atualizar item: ' + error.message,
+        };
+      }
     }
-  },
-
-  async getItemsReportForLast30Days() {
-    try {
-      const response = await axios.get(`${apiUrl}/items-report`, {
-        params: { days: 30 },
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      console.log(response.data)
-      return response.data;
-    } catch (error) {
-      console.error('Erro ao buscar relatório de itens cadastrados nos últimos 30 dias:', error);
-      return { totalItems: 0, items: [] };
-    }
-  },
-
-  async getMonthlyExpenses() {
-    try {
-      const response = await axios.get(`${apiUrl}/monthly-expenses`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      return response.data;
-    } catch (error) {
-      console.error('Erro ao buscar despesas mensais:', error);
-      return [];
-    }
-  },
-
-  async getItemsReport() {
-    try {
-      const response = await axios.get(`${apiUrl}/items-report`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      return response.data;
-    } catch (error) {
-      console.error('Erro ao buscar relatório de itens:', error);
-      return null;
-    }
-  },
+  }
+  
 };
 
 export default ItemService;

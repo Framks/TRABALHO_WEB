@@ -3,7 +3,7 @@ var mongoose = require("mongoose")
 //var mongoDB_URI = "mongodb://admin:password@127.0.0.1:27017/estoque?authSource=admin"
 
 // para rodar no docker composer
-var mongoDB_URI = "mongodb://admin:password@mongodb:27017/estoque?authSource=admin"
+var mongoDB_URI = "mongodb+srv://alunowebdev:alunowebdev@devwev2024-1.nbjxz.mongodb.net/?retryWrites=true&w=majority&appName=devwev2024-1"
 
 mongoose.connect(mongoDB_URI, {useNewUrlParser:true, useUnifiedTopology:true})
 var db= mongoose.connection

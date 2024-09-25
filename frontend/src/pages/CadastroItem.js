@@ -13,6 +13,8 @@ function CadastroItem() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setMessage(''); // Limpa a mensagem antes de tentar cadastrar
+
     try {
       const result = await ItemService.createItem({
         nome: itemName,
@@ -21,17 +23,20 @@ function CadastroItem() {
         valor_compra: Number(itemPurchasePrice),
         data: itemDate,
       });
+
       if (result && result.success) {
         setMessage('Item cadastrado com sucesso');
+        // Limpa os campos após o sucesso
         setItemName('');
         setItemQuantity('');
         setItemValue('');
         setItemPurchasePrice('');
         setItemDate('');
       } else {
-        setMessage(result.message);
+        setMessage(result.message || 'Erro ao cadastrar item.');
       }
     } catch (error) {
+      console.error('Erro ao cadastrar item:', error); // Log para verificar o erro
       setMessage('Erro ao cadastrar item: ' + error.message);
     }
   };

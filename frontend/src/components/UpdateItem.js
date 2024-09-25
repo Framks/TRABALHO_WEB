@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ItemService from '../services/ItemService';
 import '../assets/css/updateItem.css';
 
-function UpdateItem({ id, closeModal }) {
+function UpdateItem({ id, closeModal, updateItemInList }) {
   const [itemName, setItemName] = useState('');
   const [itemQuantity, setItemQuantity] = useState('');
   const [itemValue, setItemValue] = useState('');
@@ -12,15 +12,21 @@ function UpdateItem({ id, closeModal }) {
 
   useEffect(() => {
     const fetchItem = async () => {
+      if (!id) {
+        setMessage('ID do item inválido.');
+        return;
+      }
+
       try {
         const result = await ItemService.getItemById(id);
-        console.log(result);
         if (result) {
           setItemName(result.nome);
           setItemQuantity(result.quantidade);
           setItemValue(result.valor_venda);
           setItemPurchasePrice(result.valor_compra);
           setItemDate(result.data.split('T')[0]);
+        } else {
+          setMessage('Item não encontrado.');
         }
       } catch (error) {
         setMessage('Erro ao carregar item: ' + error.message);
@@ -32,7 +38,8 @@ function UpdateItem({ id, closeModal }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setMessage(''); // Limpa a mensagem antes de tentar atualizar
+  
     try {
       const result = await ItemService.updateItem(id, {
         nome: itemName,
@@ -41,14 +48,19 @@ function UpdateItem({ id, closeModal }) {
         valor_compra: Number(itemPurchasePrice),
         data: itemDate,
       });
-
-      if (result && result.success) {
+  
+      console.log('Resultado da atualização:', result); // Log para ver o resultado da atualização
+  
+      // Verifique se a atualização foi bem-sucedida
+      if (result.success) {
         setMessage('Item atualizado com sucesso');
-        closeModal(); // Fecha o modal após atualizar
+        updateItemInList(result.updatedItem); // Atualiza a lista de itens
+        closeModal(); // Fecha o modal
       } else {
-        setMessage(result.message);
+        setMessage(result.message || 'Erro ao atualizar item.');
       }
     } catch (error) {
+      console.error('Erro ao atualizar item:', error); // Log para ver o erro
       setMessage('Erro ao atualizar item: ' + error.message);
     }
   };
@@ -57,6 +69,7 @@ function UpdateItem({ id, closeModal }) {
     <div className="update-container">
       <h2>Editar Item</h2>
       <form onSubmit={handleSubmit}>
+        {/* Campos de entrada */}
         <div className="input-group">
           <label htmlFor="itemName">Nome do Item</label>
           <input

@@ -14,7 +14,6 @@ function Home() {
           <ul>
             <li><a href="#" onClick={toggleForm}>Cadastrar Item</a></li>
             <li><a href="/listagem">Listar Itens</a></li>
-            <li><a href="/relatorio-mensal">Relatório Mensal</a></li>
             <li><a href="/relatorio-geral">Relatório Geral</a></li>
           </ul>
         </nav>
