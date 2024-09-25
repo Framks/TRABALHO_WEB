@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Listagem from './pages/Listagem';
 import CadastroItem from './pages/CadastroItem';
 import RelatorioGeral from '../src/pages/RelatorioGeral';
+import RelatorioMensal from './pages/RelatorioMensal';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="cadastro" element={<CadastroItem />} />
           <Route path="listagem" element={<Listagem />} />
           <Route path='relatorio-geral' element={<RelatorioGeral />} />
+          <Route path='relatorio-mensal' element={<RelatorioMensal />} />
         </Route>
       </Routes>
     </Router>

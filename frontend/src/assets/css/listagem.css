@@ -14,6 +14,13 @@ table th, table td {
   text-align: center;
 }
 
+.actions{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+
 .modal {
   position: fixed;
   top: 0;

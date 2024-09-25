@@ -48,6 +48,13 @@
   text-decoration: underline;
 }
 
+.navbar {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: .25rem;
+}
 .form-container {
   padding: 20px;
   background: white;

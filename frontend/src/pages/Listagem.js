@@ -107,7 +107,7 @@ function Listagem() {
                 <td>{item.valor_venda}</td>
                 <td>{item.valor_compra}</td>
                 <td>{formatDate(item.data)}</td> 
-                <td>
+                <td className='actions'>
                   <button onClick={() => handleEdit(item._id)}>Editar</button>
                   <button onClick={() => handleDelete(item._id)}>Remover</button>
                 </td>

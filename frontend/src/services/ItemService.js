@@ -1,7 +1,6 @@
-// src/services/ItemService.js
 import axios from 'axios';
 
-const apiUrl = 'http://localhost:3002/items'; // Altere para sua URL de API
+const apiUrl = 'http://localhost:3002/items'; 
 
 const ItemService = {
   async createItem(item) {
@@ -14,12 +13,11 @@ const ItemService = {
       
       return {
         success: true,
-        item: response.data, // Supondo que a resposta contenha o item criado
+        item: response.data,
       };
     } catch (error) {
       console.error('Erro ao cadastrar item:', error);
       
-      // Verificando se o erro tem uma resposta
       if (error.response) {
         return {
           success: false,

@@ -21,12 +21,13 @@ body {
 .general-report-container {
   max-width: 100%;
   margin: 80px auto 0; /* Ajuste para o espaço da barra de navegação */
+  margin-top: 400px;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: calc(100vh - 80px); /* Define a altura total menos a altura do header */
-  overflow-y: auto; /* Habilita rolagem se o conteúdo exceder a altura */
+  /* height: calc(100vh - 80px); */ /* Define a altura total menos a altura do header */
+  /* overflow-y: auto;  *//* Habilita rolagem se o conteúdo exceder a altura */
 }
 
 h2 {
@@ -79,3 +80,29 @@ h2 {
     width: 100%;
   }
 }
+
+.month-selector {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.month-selector button {
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.month-selector button.active-month {
+  background-color: #007bff;
+  color: white;
+}
+
+.month-selector button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
