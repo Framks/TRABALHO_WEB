@@ -71,15 +71,13 @@ function Listagem() {
   };
 
   const formatDate = (date) => {
-    if (!date) return 'Data não disponível'; // Mensagem caso a data não esteja disponível
+    if (!date) return 'Data não disponível';
 
     const newDate = new Date(date);
-    // Ajuste para o fuso horário para evitar a data anterior
     newDate.setHours(newDate.getHours() + newDate.getTimezoneOffset() / 60);
     
-    // Formata a data no formato DD/MM/YYYY
     const day = String(newDate.getDate()).padStart(2, '0');
-    const month = String(newDate.getMonth() + 1).padStart(2, '0'); // Mês começa do zero
+    const month = String(newDate.getMonth() + 1).padStart(2, '0'); 
     const year = newDate.getFullYear();
     
     return `${day}/${month}/${year}`;
@@ -108,7 +106,7 @@ function Listagem() {
                 <td>{item.quantidade}</td>
                 <td>{item.valor_venda}</td>
                 <td>{item.valor_compra}</td>
-                <td>{formatDate(item.data)}</td> {/* Chama a função de formatação da data */}
+                <td>{formatDate(item.data)}</td> 
                 <td>
                   <button onClick={() => handleEdit(item._id)}>Editar</button>
                   <button onClick={() => handleDelete(item._id)}>Remover</button>

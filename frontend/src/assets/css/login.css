@@ -25,7 +25,7 @@ h2 {
 
 .input-group {
   margin-bottom: 15px;
-  text-align: left; /* Alinha o texto à esquerda */
+  text-align: left;
 }
 
 .input-group label {
@@ -36,7 +36,7 @@ h2 {
 }
 
 .input-group input {
-  width: calc(100% - 22px); /* Ajusta a largura para acomodar o padding e a borda */
+  width: calc(100% - 22px);
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;

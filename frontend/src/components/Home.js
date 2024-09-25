@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CadastroItem from './CadastroItem'; // Importe o componente do formulário
+import CadastroItem from './CadastroItem';
 
 function Home() {
   const [showForm, setShowForm] = useState(false);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
-import '../assets/css/home.css'; // Importar seu CSS aqui
+import '../assets/css/home.css';
 import { useNavigate } from 'react-router-dom';
 
 const Layout = () => {
@@ -27,7 +27,7 @@ const Layout = () => {
         </nav>
       </header>
       <main>
-        <Outlet /> {/* Renderiza os componentes de rota */}
+        <Outlet />
       </main>
     </div>
   );

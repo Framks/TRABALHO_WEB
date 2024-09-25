@@ -38,7 +38,7 @@ function UpdateItem({ id, closeModal, updateItemInList }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage(''); // Limpa a mensagem antes de tentar atualizar
+    setMessage('');
   
     try {
       const result = await ItemService.updateItem(id, {
@@ -49,18 +49,17 @@ function UpdateItem({ id, closeModal, updateItemInList }) {
         data: itemDate,
       });
   
-      console.log('Resultado da atualização:', result); // Log para ver o resultado da atualização
+      console.log('Resultado da atualização:', result); 
   
-      // Verifique se a atualização foi bem-sucedida
       if (result.success) {
         setMessage('Item atualizado com sucesso');
-        updateItemInList(result.updatedItem); // Atualiza a lista de itens
-        closeModal(); // Fecha o modal
+        updateItemInList(result.updatedItem); 
+        closeModal(); 
       } else {
         setMessage(result.message || 'Erro ao atualizar item.');
       }
     } catch (error) {
-      console.error('Erro ao atualizar item:', error); // Log para ver o erro
+      console.error('Erro ao atualizar item:', error);
       setMessage('Erro ao atualizar item: ' + error.message);
     }
   };
@@ -69,7 +68,6 @@ function UpdateItem({ id, closeModal, updateItemInList }) {
     <div className="update-container">
       <h2>Editar Item</h2>
       <form onSubmit={handleSubmit}>
-        {/* Campos de entrada */}
         <div className="input-group">
           <label htmlFor="itemName">Nome do Item</label>
           <input

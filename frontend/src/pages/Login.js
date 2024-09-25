@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  // Importa o useNavigate
+import { useNavigate } from 'react-router-dom';
 import UserService from '../services/UserService';
 import '../assets/css/login.css';
 
@@ -7,18 +7,17 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginMessage, setLoginMessage] = useState('');
-  const navigate = useNavigate();  // Hook para navegar para outra página
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   
     try {
-      const result = await UserService.login(username, password); // Use 'email' e 'password'
+      const result = await UserService.login(username, password);
       console.log(result);
       if (result && result.success) {
-        // Se o login for bem-sucedido, salva result.user no localStorage
         localStorage.setItem('user', JSON.stringify(result.user));
-        navigate('/'); // Redireciona para a página "home"
+        navigate('/');
       } else {
         setLoginMessage('Credenciais inválidas. Tente novamente.');
       }

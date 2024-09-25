@@ -26,7 +26,6 @@ function CadastroItem() {
 
       if (result && result.success) {
         setMessage('Item cadastrado com sucesso');
-        // Limpa os campos após o sucesso
         setItemName('');
         setItemQuantity('');
         setItemValue('');
@@ -36,7 +35,7 @@ function CadastroItem() {
         setMessage(result.message || 'Erro ao cadastrar item.');
       }
     } catch (error) {
-      console.error('Erro ao cadastrar item:', error); // Log para verificar o erro
+      console.error('Erro ao cadastrar item:', error);
       setMessage('Erro ao cadastrar item: ' + error.message);
     }
   };
